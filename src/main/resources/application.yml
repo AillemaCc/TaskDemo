@@ -1,0 +1,46 @@
+# 应用服务配置
+server:
+  port: 8989
+# Spring配置
+spring:
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/task_management
+    username: root
+    password: 123456  # 请替换为你的数据库密码
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+
+# MyBatis-Plus配置
+mybatis-plus:
+  # Mapper.xml文件位置
+  mapper-locations: classpath*:mapper/**/*.xml
+  # 实体类包路径
+  type-aliases-package: com.hmw.entity
+  # 全局配置
+  global-config:
+    db-config:
+      # 主键类型：自增
+      id-type: AUTO
+      # 逻辑删除字段名
+      logic-delete-field: isDeleted
+      # 逻辑删除值（已删除）
+      logic-delete-value: 1
+      # 逻辑未删除值
+      logic-not-delete-value: 0
+      # 表名前缀（可选）
+      # table-prefix: t_
+  # 配置MyBatis原生属性
+  configuration:
+    # 日志输出SQL语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 开启二级缓存
+    cache-enabled: true
+    # 允许返回嵌套结果
+    aggressive-lazy-loading: false
