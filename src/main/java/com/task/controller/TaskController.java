@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/task")
 public class TaskController {
@@ -38,7 +38,7 @@ public class TaskController {
 
     // 分页查询任务
     @GetMapping("/page")
-    public Result<PageResult<TaskVO>> queryTaskPage(TaskQueryVO queryVO) {
+    public Result<PageResult<TaskVO>> queryTaskPage(@RequestBody TaskQueryVO queryVO) {
         return Result.success(taskService.queryTaskPage(queryVO));
     }
 

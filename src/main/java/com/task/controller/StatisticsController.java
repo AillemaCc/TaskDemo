@@ -4,6 +4,7 @@ package com.task.controller;
 import com.task.common.Result;
 import com.task.service.StatisticsService;
 import com.task.vo.StatisticsVO;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,8 +27,16 @@ public class StatisticsController {
     // 日期范围统计
     @GetMapping("/date-range")
     public Result<List<StatisticsVO>> getByDateRange(
-            @RequestParam LocalDate startDate,
-            @RequestParam LocalDate endDate) {
+            @RequestParam("startDate")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") // 明确指定日期格式
+            LocalDate startDate,
+
+            @RequestParam("endDate")
+            @DateTimeFormat(pattern = "yyyy-MM-dd") // 支持 yyyy-MM-dd 格式
+            LocalDate endDate) {
+
+        // 也可以支持带时间的格式，例如：
+        // @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         return Result.success(statisticsService.getByDateRange(startDate, endDate));
     }
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task.mapper.TaskStatisticsMapper">
+
+    <!-- 查询指定日期范围内的统计数据 -->
+    <select id="selectByDateRange" resultType="com.task.vo.StatisticsVO">
+        SELECT
+            stat_date,
+            total_tasks,
+            completed_tasks,
+            pomodoro_count,
+            pomodoro_duration
+        FROM
+            task_statistics
+        WHERE
+            stat_date BETWEEN #{startDate} AND #{endDate}
+          AND is_deleted = 0
+        ORDER BY
+            stat_date ASC
+    </select>
+
+    <!-- 查询指定日期的统计数据 -->
+    <select id="selectByStatDate" resultType="com.task.entity.TaskStatistics">
+        SELECT
+            id,
+            stat_date,
+            total_tasks,
+            completed_tasks,
+            pomodoro_count,
+            pomodoro_duration,
+            create_time,
+            update_time,
+            is_deleted
+        FROM
+            task_statistics
+        WHERE
+            stat_date = #{statDate}
+          AND is_deleted = 0
+    </select>
+
+</mapper>
