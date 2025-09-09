@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/statistics")
 public class StatisticsController {

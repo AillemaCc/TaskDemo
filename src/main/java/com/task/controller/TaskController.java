@@ -37,7 +37,7 @@ public class TaskController {
     }
 
     // 分页查询任务
-    @GetMapping("/page")
+    @PostMapping("/page")
     public Result<PageResult<TaskVO>> queryTaskPage(@RequestBody TaskQueryVO queryVO) {
         return Result.success(taskService.queryTaskPage(queryVO));
     }
